@@ -1,0 +1,39 @@
+name: Dziki Radar - aktualizacja danych
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * 1-5'
+
+permissions:
+  contents: write
+
+jobs:
+  aktualizacja:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+
+      - name: Przygotuj Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Zainstaluj biblioteki
+        run: pip install -r requirements.txt
+
+      - name: Pobierz dane SEC
+        run: python update_data.py
+
+      - name: Zapisz dane w repozytorium
+        run: |
+          git config user.name "github-actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add radar_data.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Automatyczna aktualizacja danych"
+            git push
+          fi
+          
