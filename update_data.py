@@ -7,7 +7,7 @@ from datetime import date
 CIK = "0001824920"
 BASE = "https://data.sec.gov"
 HEADERS = {
-    "User-Agent": "DzikiRadar kontakt@example.com",
+    "User-Agent": "DzikiRadar daniel.pachuta73@gmail.com"
     "Accept": "application/json"
 }
 
