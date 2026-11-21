@@ -1,19 +1,82 @@
 <!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dziki Radar 1.1</title>
-<style>:root{color-scheme:dark}*{box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0d1722;color:#eaf1f6;margin:0;padding:18px}main{max-width:900px;margin:auto}h1{color:#81d7a7}p{line-height:1.5}.muted{color:#b1bdc8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.tile,.panel{border:1px solid #405669;background:#182a39;border-radius:14px;padding:18px}.tile{color:inherit;text-align:left;cursor:pointer;font:inherit}.tile:hover,.tile:focus-visible,.tile.active{border-color:#81d7a7;background:#213b46}.ticker{font-weight:750;font-size:1.4rem}.panel{margin-top:18px}.warning{color:#ffd095}label{display:block;margin:10px 0}input{max-width:100%;padding:9px;border:1px solid #617485;border-radius:8px;background:#0c1925;color:white}button.action{background:#81d7a7;color:#092019;border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}table{width:100%;border-collapse:collapse}td,th{padding:9px 5px;border-bottom:1px solid #405669;text-align:left}th:last-child,td:last-child{text-align:right}a{color:#a7d9fa}.hidden{display:none}</style></head>
-<body><main><h1>🐗 Dziki Radar 1.1</h1><p class="muted">Prototyp offline · dane historyczne Q3 2026 · bez sygnałów transakcyjnych i automatycznej aktualizacji</p>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dziki Radar 1.2</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0d1722;color:#eaf1f6;margin:0;padding:18px}main{max-width:900px;margin:auto}h1{color:#81d7a7}p{line-height:1.5}.muted{color:#b1bdc8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.tile,.panel{border:1px solid #405669;background:#182a39;border-radius:14px;padding:18px}.tile{color:inherit;text-align:left;cursor:pointer;font:inherit}.tile:hover,.tile:focus-visible,.tile.active{border-color:#81d7a7;background:#213b46}.ticker{font-weight:750;font-size:1.4rem}.panel{margin-top:18px}.warning{color:#ffd095}.success{color:#81d7a7}label{display:block;margin:10px 0}input{max-width:100%;padding:9px;border:1px solid #617485;border-radius:8px;background:#0c1925;color:white}button.action{background:#81d7a7;color:#092019;border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}table{width:100%;border-collapse:collapse}td,th{padding:9px 5px;border-bottom:1px solid #405669;text-align:left}th:last-child,td:last-child{text-align:right}a{color:#a7d9fa}.hidden{display:none}
+</style>
+</head>
+<body><main>
+<h1>🐗 Dziki Radar 1.2</h1>
+<p class="muted">Prototyp analityczny · automatyczne dane SEC dla IonQ · bez sygnałów transakcyjnych</p>
+<p id="syncStatus" class="muted" role="status" aria-live="polite">Ładowanie danych SEC…</p>
 <h2>10 spółek — wybierz kartę</h2><div class="grid" id="companies"></div>
 <section class="panel" id="detail" aria-live="polite"><h2 id="companyTitle"></h2><p id="companyInfo"></p><p class="muted" id="companyData"></p><p id="companySources"></p></section>
 <section class="panel"><h2>Moduł testowy wzrostu organicznego</h2><p class="muted">Wpisz porównywalne przychody działalności istniejącej w obu okresach (mln USD). Nie używaj nieweryfikowanych danych.</p><label>Poprzedni okres <input id="prev" type="number" min="0" step="any" placeholder="Brak danych"></label><label>Bieżący okres <input id="curr" type="number" min="0" step="any" placeholder="Brak danych"></label><button class="action" id="calculate">Oblicz wzrost</button><p id="result" aria-live="polite">Brak porównywalnych danych</p></section>
 <section class="panel"><h2>Dziki Score · 100 pkt</h2><table><thead><tr><th>Kryterium</th><th>Maks. pkt</th></tr></thead><tbody id="criteria"></tbody><tfoot><tr><th>Razem</th><th>100</th></tr></tfoot></table><p class="warning">Punktacja spółki: Brak danych. Tabela pokazuje wagi kryteriów, nie przyznane oceny.</p></section>
-<p class="muted">Wersja 1.1 · lokalny prototyp HTML · bez serwera i bazy danych. Dane należy weryfikować w raportach spółek.</p></main>
+<p class="muted">Wersja 1.2 · dane SEC odczytywane z pliku radar_data.json generowanego przez GitHub Actions. Weryfikuj dane w raportach spółek.</p>
+</main>
 <script>
 const symbols=['IONQ','BKSY','RKLB','QNC','XNDU','ONDS','RGTI','QBTS','RDW','VRT'];
 const weights=[['Wzrost organiczny',28],['Kontrakty i zamówienia',26],['Skalowalność',15],['Kondycja finansowa',12],['Wycena giełdowa',10],['Rozwodnienie akcji',9]];
 const companies=document.getElementById('companies');
-function selectCompany(symbol){document.querySelectorAll('.tile').forEach(b=>{const active=b.dataset.symbol===symbol;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});document.getElementById('companyTitle').textContent=symbol+' · karta spółki';const ionq=symbol==='IONQ';document.getElementById('companyInfo').textContent=ionq?'IONQ · Wzrost organiczny: NIEZWERYFIKOWANY. Wzrost segmentu Platform zawiera także wpływ przejęć.':'Wzrost organiczny: Brak danych. Kontrakty: Brak danych. Skalowalność: Brak danych. Kondycja: Brak danych. Wycena: Brak danych. Rozwodnienie: Brak danych.';document.getElementById('companyData').textContent=ionq?'Dane historyczne Q3 2026: przychody grupy 173,8 mln USD (+336% r/r); IonQ Platform 90,3 mln USD (+127% r/r); SkyWater 83,5 mln USD (segment przejęty).':'Dane finansowe: Brak danych. Ocena punktowa: Brak danych.';document.getElementById('companySources').innerHTML=ionq?'Źródło: <a href="https://www.sec.gov/Archives/edgar/data/1824920/000119312526449829/ionq-20260930.htm" target="_blank" rel="noopener noreferrer">SEC 10-Q IonQ Q3 2026</a>':'Źródła: Brak danych.';}
+let selected='IONQ';
+let ionqData=null;
+const numberPL=(value,digits=2)=>Number(value).toLocaleString('pl-PL',{maximumFractionDigits:digits});
+const moneyMillions=value=>Number.isFinite(Number(value))&&value!==null?numberPL(Number(value)/1000000,3)+' mln USD':'Brak danych';
+function selectCompany(symbol){
+ selected=symbol;
+ document.querySelectorAll('.tile').forEach(b=>{const active=b.dataset.symbol===symbol;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ document.getElementById('companyTitle').textContent=symbol+' · karta spółki';
+ const info=document.getElementById('companyInfo'),data=document.getElementById('companyData'),sources=document.getElementById('companySources');
+ if(symbol!=='IONQ'){
+  info.textContent='Wzrost organiczny: Brak danych. Kontrakty: Brak danych. Skalowalność: Brak danych. Kondycja: Brak danych. Wycena: Brak danych. Rozwodnienie: Brak danych.';
+  data.textContent='Dane finansowe: Brak danych. Ocena punktowa: Brak danych.';
+  sources.textContent='Źródła: Brak danych.';
+  return;
+ }
+ info.textContent='IONQ · Wzrost organiczny: NIEZWERYFIKOWANY. Skonsolidowany wzrost przychodów może zawierać wpływ przejęć.';
+ if(ionqData){
+  const current=ionqData.przychod_kwartalny_usd;
+  const previous=ionqData.przychod_kwartalny_rok_wczesniej_usd;
+  const growth=ionqData.wzrost_przychodow_rr_proc;
+  const fields=[
+   'Przychody kwartalne: '+moneyMillions(current),
+   'Ten sam kwartał rok wcześniej: '+moneyMillions(previous),
+   'Wzrost przychodów grupy r/r: '+(growth===null||growth===undefined?'Brak danych':numberPL(growth)+'%'),
+   'Koniec kwartału: '+(ionqData.koniec_kwartalu||'Brak danych'),
+   'Wzrost organiczny: NIEZWERYFIKOWANY'
+  ];
+  data.textContent=fields.join(' · ');
+ }else{
+  data.textContent='Dane automatyczne SEC: niedostępne. Dane historyczne Q3 2026: przychody grupy 173,8 mln USD (+336% r/r); IonQ Platform 90,3 mln USD (+127% r/r); SkyWater 83,5 mln USD (segment przejęty).';
+ }
+ sources.innerHTML='Źródła: <a href="https://www.sec.gov/Archives/edgar/data/1824920/000119312526449829/ionq-20260930.htm" target="_blank" rel="noopener noreferrer">Raport SEC 10-Q IonQ Q3 2026</a> · <a href="./radar_data.json" target="_blank" rel="noopener noreferrer">Automatyczny plik danych</a>';
+}
 for(const symbol of symbols){const b=document.createElement('button');b.className='tile';b.dataset.symbol=symbol;b.innerHTML='<span class="ticker">'+symbol+'</span><br><small>Otwórz kartę</small>';b.addEventListener('click',()=>selectCompany(symbol));companies.appendChild(b)}
 document.getElementById('criteria').innerHTML=weights.map(([name,points])=>'<tr><td>'+name+'</td><td>'+points+'</td></tr>').join('');
 document.getElementById('calculate').addEventListener('click',()=>{const a=document.getElementById('prev').value,b=document.getElementById('curr').value,out=document.getElementById('result');if(a===''||b===''){out.textContent='Brak porównywalnych danych';return}const prev=Number(a),curr=Number(b);if(!Number.isFinite(prev)||!Number.isFinite(curr)||prev<=0||curr<0){out.textContent='Podaj poprawne przychody; poprzedni okres musi być większy od zera.';return}const growth=(curr/prev-1)*100;out.textContent='Wzrost porównywalny: '+growth.toLocaleString('pl-PL',{maximumFractionDigits:2})+'% (wynik testowy; nie jest automatycznie zweryfikowanym wzrostem organicznym).'});
+async function loadIonqData(){
+ const status=document.getElementById('syncStatus');
+ try{
+  const response=await fetch('./radar_data.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('HTTP '+response.status);
+  const json=await response.json();
+  if(json.spolka!=='IONQ'||typeof json.przychod_kwartalny_usd!=='number'||!Number.isFinite(json.przychod_kwartalny_usd))throw new Error('Nieprawidłowy format danych');
+  ionqData=json;
+  const date=json.aktualizacja?new Date(json.aktualizacja):null;
+  const updated=date&&!Number.isNaN(date.getTime())?date.toLocaleString('pl-PL',{timeZone:'Europe/Warsaw',dateStyle:'short',timeStyle:'short'})+' (czas polski)':'Brak daty';
+  status.textContent='✓ Dane IonQ wczytane z SEC · aktualizacja pliku: '+updated;
+  status.className='success';
+ }catch(error){
+  status.textContent='Nie udało się wczytać radar_data.json ('+error.message+'). Pokazuję dane historyczne; sprawdź publikację pliku na GitHub Pages.';
+  status.className='warning';
+ }
+ if(selected==='IONQ')selectCompany('IONQ');
+}
 selectCompany('IONQ');
-</script></body></html>
+loadIonqData();
+</script>
+</body></html>
