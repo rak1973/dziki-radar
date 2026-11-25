@@ -1,9 +1,61 @@
 {
-  "wersja_schematu": 2,
-  "aktualizacja": "2026-11-24T21:20:54.710828+00:00",
+  "wersja_schematu": 3,
+  "aktualizacja": "2026-11-25T00:14:35.287720+00:00",
   "zrodlo": "SEC EDGAR; bezpłatny poziom bazowy",
   "spolki": {
     "IONQ": {
+      "kondycja_finansowa": {
+        "punkty": 7,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 4.237,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 4.24.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 3,
+            "maks": 4,
+            "wartosc": 0.577,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 0.58.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 0,
+            "maks": 4,
+            "wartosc": 3.9,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "IONQ",
       "nazwa_sec": "IonQ, Inc.",
       "cik": "0001824920",
@@ -21,6 +73,58 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "BKSY": {
+      "kondycja_finansowa": {
+        "punkty": 9,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 5.271,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 5.27.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 2,
+            "maks": 4,
+            "wartosc": 0.486,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 0.49.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 3,
+            "maks": 4,
+            "wartosc": 28.3,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "BKSY",
       "nazwa_sec": "BlackSky Technology Inc.",
       "cik": "0001753539",
@@ -38,6 +142,58 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "RKLB": {
+      "kondycja_finansowa": {
+        "punkty": 12,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 8.554,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 8.55.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 7.242,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 7.24.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 278.3,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "RKLB",
       "nazwa_sec": "ROCKET LAB CORP",
       "cik": "0001819994",
@@ -81,6 +237,58 @@
       "cik": "0002097163"
     },
     "ONDS": {
+      "kondycja_finansowa": {
+        "punkty": 8,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 3.389,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 3.39.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 3,
+            "maks": 4,
+            "wartosc": 0.687,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 0.69.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 1,
+            "maks": 4,
+            "wartosc": 10.8,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "ONDS",
       "nazwa_sec": "Ondas Inc.",
       "cik": "0001646188",
@@ -98,6 +306,58 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "RGTI": {
+      "kondycja_finansowa": {
+        "punkty": 8,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 5.293,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 5.29.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 3,
+            "maks": 4,
+            "wartosc": 0.596,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 0.60.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 1,
+            "maks": 4,
+            "wartosc": 8.6,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "RGTI",
       "nazwa_sec": "RIGETTI COMPUTING, INC.",
       "cik": "0001838359",
@@ -115,6 +375,58 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "QBTS": {
+      "kondycja_finansowa": {
+        "punkty": 11,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 17.308,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 17.31.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 9.219,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 9.22.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 3,
+            "maks": 4,
+            "wartosc": 26.3,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "QBTS",
       "nazwa_sec": "D-WAVE QUANTUM INC.",
       "cik": "0001907982",
@@ -132,6 +444,58 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "RDW": {
+      "kondycja_finansowa": {
+        "punkty": 12,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 4.195,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 4.20.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 2.838,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 2.84.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": 49.0,
+            "jednostka": "mies.",
+            "uzasadnienie": "Szacunkowy czas finansowania: gotówka / roczny ujemny CFO; to uproszczenie, nie prognoza.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "RDW",
       "nazwa_sec": "Redwire Corporation",
       "cik": "0001819810",
@@ -149,6 +513,57 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     },
     "VRT": {
+      "kondycja_finansowa": {
+        "punkty": 8,
+        "oceniono_z": 12,
+        "maks": 12,
+        "kompletna": true,
+        "skladniki": [
+          {
+            "nazwa": "Płynność bieżąca",
+            "punkty": 2,
+            "maks": 4,
+            "wartosc": 1.392,
+            "jednostka": "x",
+            "uzasadnienie": "Aktywa obrotowe / zobowiązania krótkoterminowe = 1.39.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "AssetsCurrent",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Pokrycie zobowiązań gotówką",
+            "punkty": 2,
+            "maks": 4,
+            "wartosc": 0.403,
+            "jednostka": "x",
+            "uzasadnienie": "Gotówka i ekwiwalenty / zobowiązania krótkoterminowe = 0.40.",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "CashAndCashEquivalentsAtCarryingValue",
+              "LiabilitiesCurrent"
+            ],
+            "koniec": "2026-09-30"
+          },
+          {
+            "nazwa": "Przepływy operacyjne / zapas gotówki",
+            "punkty": 4,
+            "maks": 4,
+            "wartosc": null,
+            "jednostka": "mies.",
+            "uzasadnienie": "Przepływy operacyjne za 12 miesięcy są nieujemne (3665.50 mln USD).",
+            "zrodlo": "SEC EDGAR Company Facts",
+            "tagi": [
+              "NetCashProvidedByUsedInOperatingActivities"
+            ],
+            "koniec": "2026-09-30"
+          }
+        ],
+        "metoda": "WSTĘPNA: trzy wskaźniki po maks. 4 pkt; punktacja do przeglądu przez analityka.",
+        "uwaga": "Nie jest oceną jakości technologii ani pełnym Dziki Score 100. Brak danych ≠ 0 pkt. Wskaźnik runway ignoruje przyszłe finansowanie i inwestycje."
+      },
       "spolka": "VRT",
       "nazwa_sec": "Vertiv Holdings Co",
       "cik": "0001674101",
@@ -166,5 +581,5 @@
       "uwaga": "To wzrost przychodów skonsolidowanych, NIE zweryfikowany wzrost organiczny. Analiza przejęć wymagana."
     }
   },
-  "nota": "Status ok oznacza dostępność danych, nie ocenę inwestycyjną. Brak wyliczeń wzrostu organicznego bez weryfikacji przejęć."
+  "nota": "Pierwsza WSTĘPNA punktacja dotyczy wyłącznie kondycji finansowej, maks. 12 pkt. Pozostałe 88 pkt pozostają nieocenione. Wzrost organiczny wymaga weryfikacji przejęć."
 }
