@@ -3,26 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dziki Radar 1.3</title>
+<title>Dziki Radar 1.4</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0d1722;color:#eaf1f6;margin:0;padding:18px}main{max-width:900px;margin:auto}h1{color:#81d7a7}p{line-height:1.5}.muted{color:#b1bdc8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.tile,.panel{border:1px solid #405669;background:#182a39;border-radius:14px;padding:18px}.tile{color:inherit;text-align:left;cursor:pointer;font:inherit}.tile:hover,.tile:focus-visible,.tile.active{border-color:#81d7a7;background:#213b46}.ticker{font-weight:750;font-size:1.4rem}.panel{margin-top:18px}.warning{color:#ffd095}.success{color:#81d7a7}label{display:block;margin:10px 0}input{max-width:100%;padding:9px;border:1px solid #617485;border-radius:8px;background:#0c1925;color:white}button.action{background:#81d7a7;color:#092019;border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}table{width:100%;border-collapse:collapse}td,th{padding:9px 5px;border-bottom:1px solid #405669;text-align:left}th:last-child,td:last-child{text-align:right}a{color:#a7d9fa}.small{font-size:.8rem}.hidden{display:none}
+:root{color-scheme:dark}*{box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0d1722;color:#eaf1f6;margin:0;padding:18px}main{max-width:900px;margin:auto}h1{color:#81d7a7}p{line-height:1.5}.muted{color:#b1bdc8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.tile,.panel{border:1px solid #405669;background:#182a39;border-radius:14px;padding:18px}.tile{color:inherit;text-align:left;cursor:pointer;font:inherit}.tile:hover,.tile:focus-visible,.tile.active{border-color:#81d7a7;background:#213b46}.ticker{font-weight:750;font-size:1.4rem}.panel{margin-top:18px}.warning{color:#ffd095}.success{color:#81d7a7}label{display:block;margin:10px 0}input{max-width:100%;padding:9px;border:1px solid #617485;border-radius:8px;background:#0c1925;color:white}button.action{background:#81d7a7;color:#092019;border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}table{width:100%;border-collapse:collapse}td,th{padding:9px 5px;border-bottom:1px solid #405669;text-align:left}th:last-child,td:last-child{text-align:right}a{color:#a7d9fa}.small{font-size:.8rem}.note-list{padding-left:21px}.note-list li{margin:8px 0}.score-detail{border-left:2px solid #566a7c;margin:9px 0;padding:6px 12px}.score-detail p{margin:4px 0}.score-status{font-weight:700}.note-heading{margin-top:14px;font-weight:700}.hidden{display:none}
 </style>
 </head>
 <body><main>
-<h1>🐗 Dziki Radar 1.3</h1>
+<h1>🐗 Dziki Radar 1.4</h1>
 <p class="muted">Prototyp analityczny · automatyczne dane SEC dla 10 spółek · bez sygnałów transakcyjnych</p>
 <p id="syncStatus" class="muted" role="status" aria-live="polite">Ładowanie danych SEC…</p>
 <h2>10 spółek — wybierz kartę</h2><div class="grid" id="companies"></div>
 <section class="panel" id="detail" aria-live="polite"><h2 id="companyTitle"></h2><p id="companyInfo"></p><p id="companyData"></p><p class="muted" id="companyNote"></p><p id="companySources"></p></section>
 <section class="panel"><h2>Moduł testowy wzrostu organicznego</h2><p class="muted">Wpisz porównywalne przychody działalności istniejącej w obu okresach (mln USD). Nie używaj nieweryfikowanych danych.</p><label>Poprzedni okres <input id="prev" type="number" min="0" step="any" placeholder="Brak danych"></label><label>Bieżący okres <input id="curr" type="number" min="0" step="any" placeholder="Brak danych"></label><button class="action" id="calculate">Oblicz wzrost</button><p id="result" aria-live="polite">Brak porównywalnych danych</p></section>
-<section class="panel"><h2>Dziki Score · 100 pkt</h2><table><thead><tr><th>Kryterium</th><th>Maks. pkt</th></tr></thead><tbody id="criteria"></tbody><tfoot><tr><th>Razem</th><th>100</th></tr></tfoot></table><p class="warning">Ocena punktowa spółek: Brak danych. Tabela przedstawia wagi, nie przyznane punkty. Rozwodnienie oceniamy netto, uwzględniając również skup akcji.</p></section>
-<p class="muted small">Wersja 1.3 · plik <a href="./radar_data.json" target="_blank" rel="noopener noreferrer">radar_data.json</a> generowany przez GitHub Actions. Nie utożsamiaj całkowitego wzrostu przychodów ze wzrostem organicznym.</p>
+<section class="panel"><h2>Dziki Score · 100 pkt</h2>
+<p id="scoreSummary" class="warning" aria-live="polite">Ocena 100 pkt: jeszcze nieobliczona.</p>
+<table><thead><tr><th>Kryterium</th><th>Ocena</th><th>Maks. pkt</th></tr></thead><tbody id="criteria"></tbody><tfoot><tr><th>Pełny wynik</th><th id="fullScore">Nieobliczony</th><th>100</th></tr></tfoot></table>
+<h3>Kondycja finansowa — szczegóły (metoda testowa)</h3><div id="financeDetails" class="muted" aria-live="polite">Brak danych.</div>
+<p class="muted small">Oceniamy tylko wskaźniki możliwe do sprawdzenia w SEC. Wszystkie progi są wstępne. Brak danych nie oznacza zero punktów. Pozycja „rozwodnienie” uwzględni kiedyś zmianę liczby akcji netto oraz skup.</p></section>
+<section class="panel"><h2>Dziki Analityk — notatki</h2><p class="muted small">Fakty, interpretacje i hipotezy są rozdzielone; interpretacja nie jest potwierdzeniem. Notatki pochodzą z osobnego pliku analizy.json w repozytorium.</p><div id="analystNotes">Ładowanie notatek…</div></section>
+<p class="muted small">Wersja 1.4 · plik <a href="./radar_data.json" target="_blank" rel="noopener noreferrer">radar_data.json</a> generowany przez GitHub Actions. Nie utożsamiaj całkowitego wzrostu przychodów ze wzrostem organicznym.</p>
 </main>
 <script>
 const symbols=['IONQ','BKSY','RKLB','QNC','XNDU','ONDS','RGTI','QBTS','RDW','VRT'];
 const weights=[['Wzrost organiczny',28],['Kontrakty i zamówienia',26],['Skalowalność',15],['Kondycja finansowa',12],['Wycena giełdowa',10],['Rozwodnienie akcji netto',9]];
 const companies=document.getElementById('companies');
-let selected='IONQ', radar=null;
+let selected='IONQ', radar=null, analyses=null;
 const numberPL=(value,digits=2)=>Number(value).toLocaleString('pl-PL',{maximumFractionDigits:digits});
 const moneyMillions=value=>typeof value==='number'&&Number.isFinite(value)?numberPL(value/1e6,3)+' mln USD':'Brak danych';
 function card(symbol){
@@ -44,6 +49,7 @@ function selectCompany(symbol){
  document.getElementById('companyTitle').textContent=symbol+' · karta spółki';
  const info=document.getElementById('companyInfo'),data=document.getElementById('companyData'),note=document.getElementById('companyNote'),sources=document.getElementById('companySources');
  const item=card(symbol);
+ renderScore(item);renderAnalyses(symbol);
  if(!item){
   info.textContent='Nie ma danych dla tej spółki w obecnym pliku. Nie oznacza to zerowych przychodów.';
   data.textContent='Przychody kwartalne: Brak danych · Wzrost r/r: Brak danych · Ocena punktowa: Brak danych';
@@ -59,7 +65,7 @@ function selectCompany(symbol){
   'Wzrost skonsolidowany r/r: '+(typeof item.wzrost_przychodow_rr_proc==='number'?numberPL(item.wzrost_przychodow_rr_proc)+'%':'Brak danych'),
   'Koniec kwartału: '+(item.koniec_kwartalu||'Brak danych'),
   'Wzrost organiczny: NIEZWERYFIKOWANY',
-  'Dziki Score: Brak danych'
+  'Pełny Dziki Score: jeszcze nieobliczony'
  ].join(' · ');
  note.textContent=item.uwaga||'Nie traktuj wzrostu skonsolidowanego jako organicznego.';
  // Buduj odnośniki elementami DOM — bez wkładania zewnętrznych danych do HTML.
@@ -75,7 +81,64 @@ for(const symbol of symbols){
  b.append(label,document.createElement('br'),small);b.addEventListener('click',()=>selectCompany(symbol));companies.appendChild(b);
 }
 const criteria=document.getElementById('criteria');
-for(const [name,points] of weights){const tr=document.createElement('tr');for(const val of [name,String(points)]){const td=document.createElement('td');td.textContent=val;tr.appendChild(td);}criteria.appendChild(tr)}
+function renderScore(item){
+ const fin=item&&item.kondycja_finansowa;
+ criteria.replaceChildren();
+ for(const [name,max] of weights){
+  const tr=document.createElement('tr');
+  let grade='Brak danych';
+  if(name==='Kondycja finansowa'&&fin){
+   if(fin.oceniono_z===0)grade='Brak danych';
+   else if(fin.kompletna)grade=fin.punkty+' / 12 (wstępna)';
+   else grade=fin.punkty+' / '+fin.oceniono_z+' sprawdzonych (niepełna)';
+  }
+  for(const val of [name,grade,String(max)]){
+   const td=document.createElement('td');td.textContent=val;tr.appendChild(td);
+  }
+  criteria.appendChild(tr);
+ }
+ const scored=fin&&fin.oceniono_z>0;
+ document.getElementById('scoreSummary').textContent=scored?
+  'Ocena cząstkowa kondycji finansowej: '+fin.punkty+' / '+fin.oceniono_z+' ocenionych punktów (maks. 12). Pełny wynik 100 pkt: jeszcze nieobliczony.':
+  'Ocena cząstkowa: brak danych. Pełny wynik 100 pkt: jeszcze nieobliczony.';
+ document.getElementById('fullScore').textContent='Nieobliczony';
+ const area=document.getElementById('financeDetails');area.replaceChildren();
+ if(!fin||!Array.isArray(fin.skladniki)){
+  area.textContent='Oczekiwanie na pierwszą aktualizację danych wersji 1.4.';return;
+ }
+ for(const part of fin.skladniki){
+  const box=document.createElement('div');box.className='score-detail';
+  const head=document.createElement('p');head.className='score-status';
+  head.textContent=part.nazwa+': '+(part.punkty===null?'Brak danych':part.punkty+' / '+part.maks+' pkt');
+  const why=document.createElement('p');why.textContent=part.uzasadnienie||'Bez komentarza.';
+  const source=document.createElement('p');source.className='small muted';
+  source.textContent='Źródło: '+(part.zrodlo||'Brak')+' · '+(part.koniec||'Brak daty')+' · '+(part.tagi||[]).join(', ');
+  box.append(head,why,source);area.appendChild(box);
+ }
+}
+function renderAnalyses(symbol){
+ const area=document.getElementById('analystNotes');area.replaceChildren();
+ if(!analyses){area.textContent='Notatki analityczne jeszcze się ładują lub są niedostępne.';return}
+ const note=analyses.spolki&&analyses.spolki[symbol];
+ if(!note){area.textContent='Brak zatwierdzonych notatek dla tej spółki.';return}
+ const sections=[['Potwierdzone fakty','fakty'],['Nasze interpretacje','interpretacje'],['Hipotezy do sprawdzenia','hipotezy']];
+ for(const [header,key] of sections){
+  const h=document.createElement('p');h.className='note-heading';h.textContent=header;area.appendChild(h);
+  const entries=Array.isArray(note[key])?note[key]:[];
+  if(entries.length===0){const p=document.createElement('p');p.className='muted';p.textContent='Brak danych';area.appendChild(p);continue;}
+  const ul=document.createElement('ul');ul.className='note-list';
+  for(const entry of entries){const li=document.createElement('li');li.textContent=entry;ul.appendChild(li)}
+  area.appendChild(ul);
+ }
+}
+async function loadAnalyses(){
+ try{
+  const r=await fetch('./analizy.json',{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
+  const data=await r.json();if(!data||!data.spolki||typeof data.spolki!=='object')throw Error('Błędny format');
+  analyses=data;
+ }catch(e){analyses=null;}
+ renderAnalyses(selected);
+}
 document.getElementById('calculate').addEventListener('click',()=>{
  const a=document.getElementById('prev').value,b=document.getElementById('curr').value,out=document.getElementById('result');
  if(a===''||b===''){out.textContent='Brak porównywalnych danych';return}
@@ -103,6 +166,6 @@ async function loadRadar(){
  }
  renderTiles();selectCompany(selected);
 }
-selectCompany('IONQ');loadRadar();
+selectCompany('IONQ');loadRadar();loadAnalyses();
 </script>
 </body></html>

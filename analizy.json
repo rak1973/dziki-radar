@@ -1,0 +1,33 @@
+{
+  "wersja": 1,
+  "opis": "Notatki opisowe użytkownika i analityka; interpretacje i hipotezy nie są zweryfikowanymi faktami ani rekomendacjami.",
+  "spolki": {
+    "IONQ": {
+      "fakty": [],
+      "interpretacje": [
+        "Skonsolidowany wzrost przychodów wymaga oddzielenia wpływu przejęć przed oceną organicznego wzrostu."
+      ],
+      "hipotezy": [
+        "Wpływ komercjalizacji Superion na przychody i zamówienia wymaga sprawdzenia w przyszłych raportach."
+      ]
+    },
+    "BKSY": {
+      "fakty": [],
+      "interpretacje": [
+        "W analizie trzeba osobno zbadać kontrakty, przychody powtarzalne, koszty satelitów Gen-3 i platformę Spectra."
+      ],
+      "hipotezy": [
+        "Wzrost wykorzystania satelitów Gen-3 może zmienić skalowalność modelu biznesowego — wymaga weryfikacji."
+      ]
+    },
+    "RKLB": {
+      "fakty": [],
+      "interpretacje": [
+        "Projekt Neutron wymaga osobnej analizy nakładów kapitałowych, marż i ryzyka harmonogramu."
+      ],
+      "hipotezy": [
+        "Powodzenie komercjalizacji Neutron może istotnie zmienić skalę działalności — bez gwarancji."
+      ]
+    }
+  }
+}

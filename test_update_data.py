@@ -27,6 +27,8 @@ class DataTests(unittest.TestCase):
         card = build_card("EX", facts, "0000000001")
         self.assertEqual(card["wzrost_przychodow_rr_proc"], 300)
         self.assertIsNone(card["wzrost_organiczny_proc"])
+        self.assertIn("kondycja_finansowa", card)
+        self.assertEqual(card["kondycja_finansowa"]["oceniono_z"], 0)
         self.assertEqual(same_quarter_last_year(values)["val"], 40)
 
     def test_no_divide_by_zero(self):

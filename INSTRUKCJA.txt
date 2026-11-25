@@ -1,25 +1,54 @@
-DZIKI RADAR 1.3 — PACZKA TESTOWA
+DZIKI RADAR 1.4 — PAKIET TESTOWY (25 listopada 2026)
 
-W paczce są pliki:
-- index.html — nowy interfejs 10 kart, zgodny również z obecnym plikiem JSON.
-- update_data.py — pobieranie danych SEC dla maksymalnie 10 spółek.
-- test_update_data.py — 6 automatycznych testów bez internetu (opcjonalne).
+CELE
+- Pierwsza automatyczna OCENA CZĄSTKOWA: kondycja finansowa (maks. 12 pkt ze 100).
+- Oddzielone: potwierdzone fakty / interpretacje / hipotezy Dzikiego Analityka.
+- Nie ma końcowej punktacji 100/100, ponieważ inne kryteria wymagają dodatkowych źródeł.
+- Brak danych oznacza brak oceny, NIGDY 0 pkt.
 
-BEZPIECZEŃSTWO
-1. NIE nadpisuj istniejącego projektu bez kopii. Utwórz osobną gałąź w GitHubie
-   (np. feature/odkrywca-sec-10-spolek), a dopiero na niej wgraj nowe pliki.
-2. Nie podawaj nikomu hasła GitHub ani kluczy do przyszłego API FMP.
-3. Nie wgrywaj sekretów FMP do plików ani do repozytorium publicznego.
+PLIKI DO WGRANIA NA OSOBNĄ GAŁĄŹ (W KATALOGU GŁÓWNYM):
+1. index.html           — karty spółek i nowa tabela Dziki Score.
+2. update_data.py       — pobranie SEC + dołączenie oceny cząstkowej.
+3. score_finance.py     — zasady i obliczenia oceny finansowej.
+4. test_score_finance.py— testy nowego modułu.
+5. test_update_data.py  — testy danych SEC.
+6. analizy.json         — oddzielne notatki i hipotezy; bez ocen automatycznych.
 
-SPRAWDZENIE
-- Zmieniony index.html zadziała z obecną, starszą wersją radar_data.json,
-  pokazując IonQ i brak danych dla pozostałych spółek.
-- Po uruchomieniu update_data.py otrzymasz nowy radar_data.json z mapą `spolki`.
-- Skrypt SEC nie wymyśla danych: dla nierozpoznanych tickerów pokazuje brak danych.
-- Wzrost przychodów oznacza wzrost skonsolidowany, nie organiczny.
-- Skrypt używa tej samej biblioteki requests, którą masz już w requirements.txt.
+Zachowaj pliki .github/workflows/main.yml, radar_data.json i requirements.txt z dotychczasowego repozytorium.
+NIE WGRYWAJ PLIKU ZIP JAKO KODU: rozpakuj ZIP, następnie w GitHub -> Upload files
+zaznacz powyższe sześć plików. Najpierw utwórz nową gałąź radar-1-4-test z main.
 
-TESTY: python -m unittest -v test_update_data.py
+TEST NA GITHUBIE
+1. Po zapisaniu sześciu plików do gałęzi radar-1-4-test otwórz Actions.
+2. Workflow: Dziki Radar - aktualizacja danych -> Run workflow.
+3. Wybierz radar-1-4-test i uruchom.
+4. Zielony przebieg potwierdza wykonanie programu; obejrzyj radar_data.json (wersja_schematu=3).
+5. Dopiero potem ewentualnie otwórz pull request i przejrzyj wynik na stronie.
 
-DATA PRZYGOTOWANIA: 24 listopada 2026
-STATUS: projekt testowy, niezatwierdzony na GitHubie, FMP jeszcze niepodłączony.
+METODOLOGIA WSTĘPNA, DO NASZEGO ZATWIERDZENIA (12 pkt)
+A. Płynność bieżąca (0–4): aktywa obrotowe / zobowiązania krótkoterminowe.
+   >=3: 4 pkt; >=2: 3; >=1.2: 2; >=1: 1; poniżej 1: 0.
+B. Pokrycie zobowiązań gotówką (0–4): cash / zobowiązania krótkoterminowe.
+   >=1: 4 pkt; >=0.5: 3; >=0.25: 2; >=0.1: 1; poniżej 0.1: 0.
+C. Przepływy operacyjne i runway (0–4):
+   jeśli CFO za ostatnie 12 mies. >=0: 4 pkt;
+   jeśli CFO ujemny: gotówka / |CFO| * 12 miesięcy.
+   >=36 mies.: 4 pkt; >=24: 3; >=12: 2; >=6: 1; mniej: 0.
+   Jeśli nie uda się ustalić CFO TTM, nie przyznajemy punktów za część C.
+
+WAŻNE
+- To proste, próbne reguły. Mogą nie pasować do każdej branży i spółki; nie są
+  rekomendacją inwestycyjną ani pełną oceną jakości finansów.
+- Runway ignoruje przyszłe wydatki inwestycyjne i finansowanie zewnętrzne.
+- Nie oceniamy wzrostu organicznego na podstawie skonsolidowanego wzrostu przychodów.
+- Żadnych kluczy API ani haseł nie wgrywamy do publicznego repozytorium.
+- Notatki analityczne są jawne w publicznym GitHubie: nie dodawaj prywatnych danych.
+- Obecny kod SEC zawiera kontaktowy adres e-mail w User-Agent (już istniejący
+  w publicznym repozytorium). Rozważmy później osobny adres projektowy.
+
+LOKALNE TESTY
+  python -m unittest -v test_update_data.py test_score_finance.py
+
+WSZYSTKIE PUNKTY W MODELU 100:
+  Wzrost organiczny 28; Kontrakty 26; Skalowalność 15; Kondycja finansowa 12;
+  Wycena 10; Rozwodnienie netto 9.

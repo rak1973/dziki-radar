@@ -1,4 +1,4 @@
-"""Dziki Radar 1.3 — bezpłatny, weryfikowalny przesiew spółek z SEC EDGAR.
+"""Dziki Radar 1.4 — bezpłatny, weryfikowalny przesiew spółek z SEC EDGAR.
 
 Uruchamianie: python update_data.py
 Wyjście: radar_data.json (10 kart, statusy i źródła danych).
@@ -13,6 +13,8 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 import requests
+
+from score_finance import evaluate_financial_health
 
 SYMBOLS = ("IONQ", "BKSY", "RKLB", "QNC", "XNDU", "ONDS", "RGTI", "QBTS", "RDW", "VRT")
 SEC_BASE = "https://data.sec.gov"
@@ -127,6 +129,7 @@ def build_card(symbol, facts, cik):
     latest = quarters[-1]
     previous = same_quarter_last_year(quarters)
     return {
+        "kondycja_finansowa": evaluate_financial_health(facts, latest["end"]),
         "spolka": symbol,
         "nazwa_sec": facts.get("entityName"),
         "cik": cik,
@@ -164,11 +167,11 @@ def main():
                 cards[symbol] = empty_card(symbol, "blad_pobierania", f"Nie udało się pobrać danych SEC ({type(exc).__name__}).")
 
     result = {
-        "wersja_schematu": 2,
+        "wersja_schematu": 3,
         "aktualizacja": datetime.now(timezone.utc).isoformat(),
         "zrodlo": "SEC EDGAR; bezpłatny poziom bazowy",
         "spolki": cards,
-        "nota": "Status ok oznacza dostępność danych, nie ocenę inwestycyjną. Brak wyliczeń wzrostu organicznego bez weryfikacji przejęć.",
+        "nota": "Pierwsza WSTĘPNA punktacja dotyczy wyłącznie kondycji finansowej, maks. 12 pkt. Pozostałe 88 pkt pozostają nieocenione. Wzrost organiczny wymaga weryfikacji przejęć.",
     }
     # Zapis atomowy — nie pozostawiaj uszkodzonego pliku przy przerwaniu.
     temp_path = OUTPUT.with_suffix(".tmp")
